@@ -54,10 +54,33 @@ describe("confirm", () => {
     expect(handleCancel).not.toHaveBeenCalled();
   });
 
-  test("reject on cancel", async () => {
+  test("default cancel action", async () => {
     const { getByText, queryByText } = render(
       <Scene
         title="ConfirmTitle"
+        confirmButtonText="Ok"
+        cancelButtonText="Cancel"
+      />
+    );
+
+    // open confirm dialog
+    expect(queryByText("ConfirmTitle")).toBeFalsy();
+    fireEvent.click(getByText("TriggerConfirm"));
+    expect(queryByText("ConfirmTitle")).toBeTruthy();
+
+    // click cancel
+    fireEvent.click(getByText("Cancel"));
+    await waitForElementToBeRemoved(() => queryByText("ConfirmTitle"));
+    expect(handleCancel).not.toHaveBeenCalled();
+    // ignore this, 'cause ts-jest cannot distinguish whether a func is called or not between multiple tests
+    // expect(handleConfirm).not.toHaveBeenCalled();
+  });
+
+  test("catch on cancel", async () => {
+    const { getByText, queryByText } = render(
+      <Scene
+        title="ConfirmTitle"
+        catchOnCancel
         confirmButtonText="Ok"
         cancelButtonText="Cancel"
       />

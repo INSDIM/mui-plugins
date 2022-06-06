@@ -15,6 +15,7 @@ export const useConfirm = () => useContext(confirmServiceContext);
 
 interface providerProps {
   children?: React.ReactNode;
+  defaultOptions?: ConfirmOptions;
 }
 
 const defaultOptions = {
@@ -26,7 +27,10 @@ const defaultOptions = {
 } as ConfirmOptions;
 
 export function ConfirmServiceProvider(props: providerProps) {
-  const [options, setOptions] = useState<ConfirmOptions>(defaultOptions);
+  const [options, setOptions] = useState<ConfirmOptions>({
+    ...defaultOptions,
+    ...props.defaultOptions,
+  });
   const [resolveReject, setResolveReject] = useState(
     [] as [] as ((a?: any) => void)[]
   );
@@ -48,7 +52,7 @@ export function ConfirmServiceProvider(props: providerProps) {
 
   const handleCancel = useCallback(() => {
     if (reject) {
-      reject();
+      if (options.catchOnCancel) reject();
       handleClose();
     }
   }, [reject, handleClose]);

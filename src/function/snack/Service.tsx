@@ -16,6 +16,7 @@ export const useSnack = () => useContext(snackServiceContext);
 
 interface providerProps {
   children?: React.ReactNode;
+  defaultOptions?: SnackbarOptions;
 }
 
 const defaultOptions = {
@@ -26,8 +27,10 @@ const defaultOptions = {
 } as SnackbarOptions;
 
 export function SnackServiceProvider(props: providerProps) {
-  const [options, setOptions] =
-    useState<Omit<SnackbarOptions, "onClose">>(defaultOptions);
+  const [options, setOptions] = useState<Omit<SnackbarOptions, "onClose">>({
+    ...defaultOptions,
+    ...props.defaultOptions,
+  });
   const [resolveReject, setResolveReject] = useState(
     [] as ((a?: any) => void)[]
   );

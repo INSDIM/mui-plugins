@@ -22,6 +22,7 @@ export interface ConfirmOptions {
   confirmButtonVariant?: ButtonTypeMap["props"]["variant"];
   confirmButtonProps?: ButtonProps;
 
+  catchOnCancel?: boolean;
   cancelButtonColor?: ButtonTypeMap["props"]["color"];
   cancelButtonText?: React.ReactNode;
   cancelButtonVariant?: ButtonTypeMap["props"]["variant"];
