@@ -8,13 +8,11 @@ import React from "react";
 
 export interface ConfirmOptions {
   title?: React.ReactNode;
-  titleProps?: DialogTitleProps;
+  content?: React.ReactNode;
 
   dialogProps?: DialogProps;
-
-  content?: React.ReactNode;
+  titleProps?: DialogTitleProps;
   contentProps?: DialogContentProps;
-
   actionProps?: DialogActionsProps;
 
   confirmButtonColor?: ButtonTypeMap["props"]["color"];
@@ -22,11 +20,12 @@ export interface ConfirmOptions {
   confirmButtonVariant?: ButtonTypeMap["props"]["variant"];
   confirmButtonProps?: ButtonProps;
 
-  catchOnCancel?: boolean;
   cancelButtonColor?: ButtonTypeMap["props"]["color"];
   cancelButtonText?: React.ReactNode;
   cancelButtonVariant?: ButtonTypeMap["props"]["variant"];
   cancelButtonProps?: ButtonProps;
+
+  catchOnCancel?: boolean;
 }
 
 interface ConfirmDialogProps extends ConfirmOptions {
