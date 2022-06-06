@@ -24,4 +24,4 @@ yarn-error.log*
 
 .npmrc
 .yarnrc
-
+.vscode
