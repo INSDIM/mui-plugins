@@ -45,7 +45,7 @@ export function SnackServiceProvider(props: providerProps) {
     (customOptions: Omit<SnackbarOptions, "onClose">) => {
       return new Promise((resolve, reject) => {
         setOptions({
-          ...defaultOptions,
+          ...options,
           ...customOptions,
         });
         setResolveReject([resolve, reject]);

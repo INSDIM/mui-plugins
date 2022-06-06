@@ -17,9 +17,7 @@ describe("confirm", () => {
       try {
         await confirm(props);
         handleConfirm();
-        console.log("confirm");
       } catch (err) {
-        console.log("cancel");
         handleCancel();
       }
     };
@@ -27,18 +25,23 @@ describe("confirm", () => {
     return <button onClick={handleClick}>TriggerConfirm</button>;
   };
 
-  const Scene = (props: ConfirmOptions) => (
-    <ConfirmServiceProvider>
-      <ConfirmButton {...props} />
+  const Scene = (props: {
+    options?: ConfirmOptions;
+    defaultOptions?: ConfirmOptions;
+  }) => (
+    <ConfirmServiceProvider defaultOptions={props.defaultOptions}>
+      <ConfirmButton {...props.options} />
     </ConfirmServiceProvider>
   );
 
   test("resolve on confirm", async () => {
     const { getByText, queryByText } = render(
       <Scene
-        title="ConfirmTitle"
-        confirmButtonText="Ok"
-        cancelButtonText="Cancel"
+        options={{
+          title: "ConfirmTitle",
+          confirmButtonText: "Ok",
+          cancelButtonText: "Cancel",
+        }}
       />
     );
 
@@ -57,9 +60,11 @@ describe("confirm", () => {
   test("default cancel action", async () => {
     const { getByText, queryByText } = render(
       <Scene
-        title="ConfirmTitle"
-        confirmButtonText="Ok"
-        cancelButtonText="Cancel"
+        options={{
+          title: "ConfirmTitle",
+          confirmButtonText: "Ok",
+          cancelButtonText: "Cancel",
+        }}
       />
     );
 
@@ -79,10 +84,12 @@ describe("confirm", () => {
   test("catch on cancel", async () => {
     const { getByText, queryByText } = render(
       <Scene
-        title="ConfirmTitle"
-        catchOnCancel
-        confirmButtonText="Ok"
-        cancelButtonText="Cancel"
+        options={{
+          title: "ConfirmTitle",
+          confirmButtonText: "Ok",
+          cancelButtonText: "Cancel",
+          catchOnCancel: true,
+        }}
       />
     );
 
@@ -99,15 +106,39 @@ describe("confirm", () => {
     // expect(handleConfirm).not.toHaveBeenCalled();
   });
 
+  test("default options", async () => {
+    const { getByText, queryByText } = render(
+      <Scene
+        defaultOptions={{
+          title: "ConfirmTitle",
+          confirmButtonText: "AltOk",
+          cancelButtonText: "AltCancel",
+          content: "AltContent",
+          confirmButtonColor: "error",
+          confirmButtonProps: { color: "primary" },
+        }}
+      />
+    );
+
+    // open confirm dialog
+    expect(queryByText("AltContent")).toBeFalsy();
+    fireEvent.click(getByText("TriggerConfirm"));
+    expect(queryByText("AltContent")).toBeTruthy();
+    expect(queryByText("AltOk")).toBeTruthy();
+    expect(queryByText("AltCancel")).toBeTruthy();
+  });
+
   test("merge options", async () => {
     const { getByText, queryByText } = render(
       <Scene
-        title="ConfirmTitle"
-        confirmButtonText="AltOk"
-        cancelButtonText="AltCancel"
-        content="AltContent"
-        confirmButtonColor="error"
-        confirmButtonProps={{ color: "primary" }}
+        options={{
+          title: "ConfirmTitle",
+          confirmButtonText: "AltOk",
+          cancelButtonText: "AltCancel",
+          content: "AltContent",
+          confirmButtonColor: "error",
+          confirmButtonProps: { color: "primary" },
+        }}
       />
     );
 

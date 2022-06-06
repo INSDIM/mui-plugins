@@ -39,7 +39,7 @@ export function ConfirmServiceProvider(props: providerProps) {
   const confirm = useCallback((customOptions: ConfirmOptions) => {
     return new Promise((resolve, reject) => {
       setOptions({
-        ...defaultOptions,
+        ...options,
         ...customOptions,
       });
       setResolveReject([resolve, reject]);

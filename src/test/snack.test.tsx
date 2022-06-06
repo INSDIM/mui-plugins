@@ -19,14 +19,33 @@ describe("snack", () => {
     return <button onClick={handleClick}>TriggerSnack</button>;
   };
 
-  const Scene = (props: Omit<SnackbarOptions, "onClose">) => (
-    <SnackServiceProvider>
-      <SnackButton {...props} />
+  const Scene = (props: {
+    options?: Omit<SnackbarOptions, "onClose">;
+    defaultOptions?: SnackbarOptions;
+  }) => (
+    <SnackServiceProvider defaultOptions={props.defaultOptions}>
+      <SnackButton {...props.options} />
     </SnackServiceProvider>
   );
 
+  test("default options", async () => {
+    const { getByText, queryByText } = render(
+      <Scene defaultOptions={{ message: "DefaultSnackMessage" }} />
+    );
+
+    // open snackbar
+    expect(queryByText("DefaultSnackMessage")).toBeFalsy();
+    fireEvent.click(getByText("TriggerSnack"));
+    expect(queryByText("DefaultSnackMessage")).toBeTruthy();
+
+    // close
+    await waitForElementToBeRemoved(() => queryByText("DefaultSnackMessage"));
+  });
+
   test("resolve on close", async () => {
-    const { getByText, queryByText } = render(<Scene message="SnackMessage" />);
+    const { getByText, queryByText } = render(
+      <Scene options={{ message: "SnackMessage" }} />
+    );
 
     // open snackbar
     expect(queryByText("SnackMessage")).toBeFalsy();
