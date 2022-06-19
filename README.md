@@ -39,7 +39,7 @@ Then, when you need a confirm dialog, call the `useConfirm` hook to create a `co
 _Note: The options provided in the `confirm` function parameters will override the global options_
 
 ```js
-import { useConfirm } from "@mui/material/styles";
+import { useConfirm } from "@insdim-lab/mui-plugins";
 
 const SomeComponent = () => {
   const confirm = useConfirm();
@@ -88,7 +88,7 @@ Then, when you need a snackbar, call the `useSnack` hook to create a `snack` fun
 _Note: The options provided in the `snack` function parameters will override the global options_
 
 ```js
-import { useSnack } from "@mui/material/styles";
+import { useSnack } from "@insdim-lab/mui-plugins";
 
 const SomeComponent = () => {
   const snack = useSnack();
