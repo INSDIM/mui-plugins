@@ -1,5 +1,4 @@
 import { Snack, SnackbarOptions } from "./Snack";
-import { AlertProps, SnackbarProps } from "@mui/material";
 import React, {
   createContext,
   Fragment,
@@ -32,9 +31,9 @@ export function SnackServiceProvider(props: providerProps) {
     ...props.defaultOptions,
   });
   const [resolveReject, setResolveReject] = useState(
-    [] as ((a?: any) => void)[]
+    [] as ((a?: any) => void)[],
   );
-  const [resolve, reject] = resolveReject;
+  const [resolve, _] = resolveReject;
 
   const handleClose = useCallback(() => {
     resolve();
@@ -51,7 +50,7 @@ export function SnackServiceProvider(props: providerProps) {
         setResolveReject([resolve, reject]);
       });
     },
-    []
+    [],
   );
 
   return (

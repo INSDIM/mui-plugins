@@ -1,4 +1,4 @@
-import Alert, { AlertColor, AlertProps } from "@mui/material/Alert";
+import Alert, { AlertProps } from "@mui/material/Alert";
 import Snackbar, { SnackbarProps } from "@mui/material/Snackbar";
 import React from "react";
 

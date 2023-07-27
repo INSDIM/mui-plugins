@@ -89,6 +89,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           color={confirmButtonColor}
           onClick={onConfirm}
           disableElevation
+          {...confirmButtonProps}
         >
           {confirmButtonText ? confirmButtonText : `Ok`}
         </Button>
@@ -97,6 +98,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           color={cancelButtonColor}
           onClick={onCancel}
           disableElevation
+          {...cancelButtonProps}
         >
           {cancelButtonText ? cancelButtonText : `Cancel`}
         </Button>

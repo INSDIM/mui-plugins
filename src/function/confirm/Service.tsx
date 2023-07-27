@@ -32,7 +32,7 @@ export function ConfirmServiceProvider(props: providerProps) {
     ...props.defaultOptions,
   });
   const [resolveReject, setResolveReject] = useState(
-    [] as [] as ((a?: any) => void)[]
+    [] as [] as ((a?: any) => void)[],
   );
   const [resolve, reject] = resolveReject;
 
