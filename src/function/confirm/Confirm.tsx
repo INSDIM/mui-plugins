@@ -10,7 +10,7 @@ export interface ConfirmOptions {
   title?: React.ReactNode;
   content?: React.ReactNode;
 
-  dialogProps?: DialogProps;
+  dialogProps?: Omit<DialogProps, "open">;
   titleProps?: DialogTitleProps;
   contentProps?: DialogContentProps;
   actionProps?: DialogActionsProps;
