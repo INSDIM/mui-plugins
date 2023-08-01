@@ -9,7 +9,6 @@ import React from "react";
 export interface ConfirmOptions {
   title?: React.ReactNode;
   content?: React.ReactNode;
-
   dialogProps?: Omit<DialogProps, "open">;
   titleProps?: DialogTitleProps;
   contentProps?: DialogContentProps;
@@ -20,10 +19,14 @@ export interface ConfirmOptions {
   confirmButtonVariant?: ButtonTypeMap["props"]["variant"];
   confirmButtonProps?: ButtonProps;
 
+  useCancelButton?: boolean;
   cancelButtonColor?: ButtonTypeMap["props"]["color"];
   cancelButtonText?: React.ReactNode;
   cancelButtonVariant?: ButtonTypeMap["props"]["variant"];
   cancelButtonProps?: ButtonProps;
+
+  // Swap confirm and cancel button, default is `false` and confirm button is on the right
+  swapConfirmAndCancel?: boolean;
 
   catchOnCancel?: boolean;
 }
@@ -48,10 +51,13 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   confirmButtonVariant,
   confirmButtonProps,
 
+  useCancelButton = true,
   cancelButtonColor,
   cancelButtonText,
   cancelButtonVariant,
   cancelButtonProps,
+
+  swapConfirmAndCancel = false,
 
   open = false,
   onConfirm,
@@ -84,24 +90,39 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
         <DialogContentText>{content}</DialogContentText>
       </DialogContent>
       <DialogActions {...actionProps}>
-        <Button
-          variant={confirmButtonVariant ? confirmButtonVariant : "contained"}
-          color={confirmButtonColor}
-          onClick={onConfirm}
-          disableElevation
-          {...confirmButtonProps}
-        >
-          {confirmButtonText ? confirmButtonText : `Ok`}
-        </Button>
-        <Button
-          variant={cancelButtonVariant ? cancelButtonVariant : "text"}
-          color={cancelButtonColor}
-          onClick={onCancel}
-          disableElevation
-          {...cancelButtonProps}
-        >
-          {cancelButtonText ? cancelButtonText : `Cancel`}
-        </Button>
+        {swapConfirmAndCancel && (
+          <Button
+            variant={confirmButtonVariant ? confirmButtonVariant : "contained"}
+            color={confirmButtonColor}
+            onClick={onConfirm}
+            disableElevation
+            {...confirmButtonProps}
+          >
+            {confirmButtonText ? confirmButtonText : `Ok`}
+          </Button>
+        )}
+        {useCancelButton && (
+          <Button
+            variant={cancelButtonVariant ? cancelButtonVariant : "text"}
+            color={cancelButtonColor}
+            onClick={onCancel}
+            disableElevation
+            {...cancelButtonProps}
+          >
+            {cancelButtonText ? cancelButtonText : `Cancel`}
+          </Button>
+        )}
+        {!swapConfirmAndCancel && (
+          <Button
+            variant={confirmButtonVariant ? confirmButtonVariant : "contained"}
+            color={confirmButtonColor}
+            onClick={onConfirm}
+            disableElevation
+            {...confirmButtonProps}
+          >
+            {confirmButtonText ? confirmButtonText : `Ok`}
+          </Button>
+        )}
       </DialogActions>
     </Dialog>
   );

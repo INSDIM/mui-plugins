@@ -1,8 +1,8 @@
 {
   "name": "@insdim-lab/mui-plugins",
-  "version": "0.1.3",
+  "version": "5.1.4",
   "type": "module",
-  "description": "Plugins for MUI (Promise-based Confirm Dialog, Snackbar, etc.)",
+  "description": "Plugins for MUI v5 (Promise-based Confirm Dialog, Snackbar, etc.)",
   "scripts": {
     "build": "rollup -c",
     "test": "jest --no-cache",
