@@ -2,7 +2,6 @@ import Button, { ButtonProps, ButtonTypeMap } from "@mui/material/Button";
 import Dialog, { DialogProps } from "@mui/material/Dialog";
 import DialogActions, { DialogActionsProps } from "@mui/material/DialogActions";
 import DialogContent, { DialogContentProps } from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle, { DialogTitleProps } from "@mui/material/DialogTitle";
 import React from "react";
 
@@ -86,9 +85,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       onClose={onClose}
     >
       <DialogTitle {...titleProps}>{title}</DialogTitle>
-      <DialogContent {...contentProps}>
-        <DialogContentText>{content}</DialogContentText>
-      </DialogContent>
+      <DialogContent {...contentProps}>{content}</DialogContent>
       <DialogActions {...actionProps}>
         {swapConfirmAndCancel && (
           <Button
