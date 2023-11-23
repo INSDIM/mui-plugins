@@ -1,6 +1,6 @@
 import del from "rollup-plugin-delete";
 import external from "rollup-plugin-peer-deps-external";
-import typescript from "rollup-plugin-typescript2";
+import typescript from "@rollup/plugin-typescript";
 import pkg from "./package.json" assert { type: "json" };
 
 export default {
